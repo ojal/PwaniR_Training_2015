@@ -1,0 +1,35 @@
+\frametitle{Use R as calculator}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# enter the expression that we want evaluated and hit enter}
+\hlnum{1000} \hlopt{-} \hlnum{2} \hlopt{*} \hlnum{10}\hlopt{^}\hlnum{2}\hlopt{/}\hlstd{(}\hlnum{8} \hlopt{+} \hlnum{2}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## [1] 980
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# Built-in functions:}
+\hlkwd{log}\hlstd{(}\hlnum{1.4}\hlstd{)}  \hlcom{#returns the natural logarithm of the number 1.4}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.3365
+\end{verbatim}
+\begin{alltt}
+\hlkwd{log10}\hlstd{(}\hlnum{1.4}\hlstd{)}  \hlcom{# returns the log to the base of 10}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.1461
+\end{verbatim}
+\begin{alltt}
+\hlkwd{sqrt}\hlstd{(}\hlnum{16}\hlstd{)}  \hlcom{#returns the square root of 16}
+\end{alltt}
+\begin{verbatim}
+## [1] 4
+\end{verbatim}
+\end{kframe}
+\end{knitrout}

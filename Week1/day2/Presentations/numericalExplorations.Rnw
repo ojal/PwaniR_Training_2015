@@ -1,0 +1,106 @@
+\documentclass[pdf]{beamer}
+\mode<presentation>{}
+\pdfmapfile{+sansmathaccent.map}
+\title{Numerical explorations with R}
+\subtitle{means, median, SD; use R as calc}
+\author{Amos Thairu}
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Import data}
+<<tidy=TRUE>>=
+#import dataset
+data <- 
+  read.csv("bwmal.csv")
+@
+\pause
+<<tidy=TRUE>>=
+dim(data) #Returns the dimension of the dataset
+@
+\pause
+<<tidy=TRUE>>=
+names(data) #Returns variable names of the dataset
+@
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{View data}
+<<tidy=TRUE>>=
+head(data) #Returns first six rows of dataset
+@
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Some data explorations}
+<<tidy=TRUE>>=
+#some data explorations
+mean(data$mheight)
+@
+\pause
+<<tidy=TRUE>>=
+var(data$mheight)
+@
+\pause
+<<tidy=TRUE>>=
+sd(data$matage)
+@
+\pause
+<<tidy=TRUE>>=
+median(data$matage)
+@
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{More data explorations}
+<<tidy=TRUE>>=
+summary(data$matage)  #sumarize continous variable
+@
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Explorations for categorical variables}
+<<tidy=TRUE>>=
+table(data$sex)  #summarize categorical variable
+@
+\pause
+<<tidy=TRUE>>=
+table(data$sex,data$smoke) #cross-tabulation of two categorical variables
+@
+\pause
+<<tidy=TRUE>>=
+with(data, table(sex,smoke)) #Alternatively, with variable labels
+@
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Use R as calculator}
+<<tidy=TRUE>>=
+#enter the expression that we want evaluated and hit enter
+1000-2*10^2/(8+2)
+@
+<<tidy=TRUE>>=
+#Built-in functions:
+log(1.4)  #returns the natural logarithm of the number 1.4
+log10(1.4)  # returns the log to the base of 10
+sqrt(16)  #returns the square root of 16
+@
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Calculations with assignment statements}
+<<tidy=TRUE>>=
+#we can store a value(s) under some variable name using the assignment symbol <- 
+#("less than" followed by a hyphen)
+x < - 2.5
+#to know what is in a variable type the variable name
+x
+#can store a computation under a new variable name or change the current value in an old variable
+y <- 3*log(x)
+@
+\end{frame}
+
+\end{document}
+
+%more on using R as a calculator
+%more on summary stats
+%max(x) 
+%?with
+
+
