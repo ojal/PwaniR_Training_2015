@@ -1,11 +1,13 @@
-\documentclass[pdf]{beamer}
+\documentclass{beamer}
 \mode<presentation>{}
-\pdfmapfile{+sansmathaccent.map}
+\usetheme{CambridgeUS}
+\usecolortheme{sidebartab}
+%\pdfmapfile{+sansmathaccent.map}
 \title{Numerical explorations with R}
 \subtitle{means, median, SD; use R as calc}
 \author{Amos Thairu}
 \begin{document}
-
+\SweaveOpts{concordance=TRUE}
 \begin{frame}
 \titlepage
 \end{frame}
@@ -13,8 +15,7 @@
 \begin{frame}[fragile]\frametitle{Import data}
 <<tidy=TRUE>>=
 #import dataset
-data <- 
-  read.csv("bwmal.csv")
+data <- read.csv("bwmal.csv")
 @
 \pause
 <<tidy=TRUE>>=
@@ -88,7 +89,7 @@ sqrt(16)  #returns the square root of 16
 <<tidy=TRUE>>=
 #we can store a value(s) under some variable name using the assignment symbol <- 
 #("less than" followed by a hyphen)
-x < - 2.5
+x <- 2.5
 #to know what is in a variable type the variable name
 x
 #can store a computation under a new variable name or change the current value in an old variable
