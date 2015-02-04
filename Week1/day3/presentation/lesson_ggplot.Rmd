@@ -96,7 +96,8 @@ g <- ggplot(data = maltreat , aes(weight))
  
 ```{r}
 library(ggplot2)
-ggplot(data = maltreat , aes(x=weight , y=weight)) + geom_boxplot()
+ggplot(data = maltreat , aes(x=weight , y=weight)) +
+  geom_boxplot()
 ```
 
 
@@ -109,17 +110,22 @@ boxplot(maltreat$weight~maltreat$sex,col="grey")
 
 * * *
 - This is it
- 
+
+
+})
 ```{r}
 library(ggplot2)
-ggplot(data = maltreat , aes(x=sex , y=weight)) + geom_boxplot(fill = "red")
+ggplot(data = maltreat , aes(x=sex , y=weight)) + 
+  geom_boxplot(fill = "red")
 ```
 
 * * *
  
 ```{r}
 library(ggplot2)
-ggplot(data = maltreat , aes(x=sex , y=weight ,fill=paying)) + geom_boxplot()
+ggplot(data = maltreat , aes(x=sex ,
+                    y=weight ,fill=paying)) + 
+  geom_boxplot()
 ```
 
 ## Histogram of weight 
@@ -152,7 +158,8 @@ plot(maltreat$weight,maltreat$heartrate, pch=19,col="blue")
  
 ```{r}
 library(ggplot2)
-ggplot(data = maltreat , aes(x=weight , y=heartrate)) + geom_point()
+ggplot(data = maltreat , aes(x=weight , y=heartrate)) + 
+  geom_point()
 ```
 
 
@@ -169,7 +176,8 @@ barplot(table(maltreat$sex))
  
 ```{r}
 library(ggplot2)
-ggplot(data = maltreat , aes(sex)) + geom_bar(fill='grey') + theme_bw() + ggtitle("Barplot of gender")
+ggplot(data = maltreat , aes(sex)) + geom_bar(fill='grey') +
+  theme_bw() + ggtitle("Barplot of gender")
 ```
 
 
