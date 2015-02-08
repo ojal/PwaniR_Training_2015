@@ -1,0 +1,169 @@
+\documentclass{beamer}
+\mode<presentation>{}
+\usetheme{CambridgeUS}
+\usecolortheme{sidebartab}
+%\pdfmapfile{+sansmathaccent.map}
+\title{Numerical explorations with R}
+% \subtitle{means, median, SD; use R as calc}
+\author{Amos Thairu}
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+% \SweaveOpts{concordance=TRUE}
+\begin{frame}
+\titlepage
+\end{frame}
+
+% data <- read.csv('H:/PwaniStatsCourse/PwaniR_Training_2015/PwaniR_Training_2015/Week1/day2/presentation/bwmal.csv')
+% bwmal_subset <- data[c(1:10,190:200),-c(1,9:12)]
+% row.names(data) <- NULL
+% write.csv(bwmal_subset, 'H:/PwaniStatsCourse/PwaniR_Training_2015/PwaniR_Training_2015/Week1/day2/presentation/bwmal_subset.csv')
+
+\begin{frame}[fragile]\frametitle{Reading data files}
+Import dataset
+<<tidy=TRUE>>=
+data <- read.csv("bwmal_subset.csv")
+@
+\pause
+\begin{itemize}
+  \item Once read in, assigning the loaded data to objects
+  \item Datasets in R are typically stored as data frames, which have a matrix structure 
+  \item Observations are arranged as rows and variables, either numerical or categorical, are arranged as columns
+  \item Dataset contains 8 demographic variables for 20 individuals
+\end{itemize}
+\pause
+Get the dimension of the dataset
+<<tidy=TRUE>>=
+dim(data)
+@
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Viewing data}
+\small
+Explore variable names of the dataset
+<<tidy=TRUE>>=
+names(data) 
+@
+R has ways to look at the dataset at a glance
+<<tidy=TRUE>>=
+head(data) #Returns first six rows of dataset
+@
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Viewing data}
+\small
+We can access variables directly by using their names, using the object \$ variable notation
+ <<tidy=TRUE>>=
+data$gestwks
+@
+Check last six rows of the dataset
+<<tidy=TRUE>>=
+tail(data) #Returns first six rows of dataset
+@
+\end{frame}
+% 
+\begin{frame}[fragile]\frametitle{Viewing data}
+% \small
+To access a certain entry, we most commonly use object[row,column] \\
+Single cell value
+<<tidy=TRUE>>=
+data[2,3]    
+@
+Omitting row value implies all rows; here all rows in column 3
+<<tidy=TRUE>>=
+data[,3]
+@
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{More data viewing}
+Omitting column values implies all columns; here all columns in row 2
+<<tidy=TRUE>>=
+data[2,]
+@
+Can also use ranges - rows 2 and 3, columns 2 and 3
+<<tidy=TRUE>>=
+data[2:3, 2:3]
+@
+\end{frame}
+
+% \normal
+\begin{frame}[fragile]\frametitle{Data summaries}
+\begin{itemize}
+  \item Enables us to see the main characteristics of data before any formal modeling or hypothesis testing
+  \item Particular techniques depends on the type of variable: Continuous or categorical
+  \item Continuous eg. age, height
+  \item Categorical eg. smoking status, sex
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Some data explorations: Continuous variables}
+<<tidy=TRUE>>=
+#some data explorations
+mean(data$mheight)
+@
+\pause
+<<tidy=TRUE>>=
+var(data$mheight)
+@
+\pause
+<<tidy=TRUE>>=
+sd(data$matage)
+median(data$matage)
+@
+% \pause
+% <<tidy=TRUE>>=
+% median(data$matage)
+% @
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{More data explorations}
+Produce various summaries of continous variable
+<<tidy=TRUE>>=
+summary(data$matage)  #sumarize continous variable
+@
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Explorations for categorical variables}
+Summarize single categorical variable
+<<tidy=TRUE>>=s
+table(data$sex)  
+@
+Cross-tabulation of two categorical variables
+<<tidy=TRUE>>=
+table(data$sex,data$smoke) 
+@
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Alternative cross tabulation}
+Using \emph{'with'} command includes variable labels in the table
+<<tidy=TRUE>>=
+with(data, table(sex,smoke)) 
+@
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Use R as calculator}
+<<tidy=TRUE>>=
+1000-2*10^2/(8+2)  #expression to evaluate
+#Built-in functions:
+log(1.4)  #returns the natural logarithm of the number 1.4
+log10(1.4)  # returns the log to the base of 10
+sqrt(16)  #returns the square root of 16
+@
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Calculations with assignment statements}
+We can store a value(s) in an R object using the assignment symbol $<-$ ("less than" followed by a hyphen)
+<<tidy=TRUE>>=
+x <- 2.5
+@
+To check what is in a variable type the variable name
+<<tidy=TRUE>>=
+x
+@
+Can store a computation under a new R object or change the current value stored in an old object
+<<tidy=TRUE>>=
+y <- 3*log(x)
+@
+\end{frame}
+
+\end{document}
+% http://www.ats.ucla.edu/stat/r/seminars/intro.htm

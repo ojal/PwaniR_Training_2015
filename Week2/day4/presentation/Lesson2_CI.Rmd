@@ -1,0 +1,19 @@
+---
+title: "Confidence Intervals"
+author: "Pwani University"
+output:
+  beamer_presentation:
+    theme: "CambridgeUS"
+    colortheme: "sidebartab"
+date: "Friday, January 16, 2015"
+framework   : io2012
+---
+
+## Poin estimation 
+
+1. Provides a single value 
+          - Based on observations from one sample
+2. Gives no information about how close the value is to the unknown population parameter
+3. Example: Sample mean x = 3 is point estimate of unknown population mean
+
+

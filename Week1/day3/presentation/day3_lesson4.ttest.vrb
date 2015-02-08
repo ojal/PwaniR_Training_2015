@@ -1,0 +1,20 @@
+\begin{Schunk}
+\begin{Sinput}
+> bp_a <-c(20, 20, 21, 22, 23, 22, 27, 25, 27, 30, 31,30)
+> bp_b <- c(19, 22, 24, 24, 25, 25, 26, 26, 28, 32,28,29)
+>  t.test(bp_a,bp_b, paired=TRUE)
+\end{Sinput}
+\begin{Soutput}
+Paired t-test
+
+data:  bp_a and bp_b
+t = -1.5202, df = 11, p-value = 0.1567
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -2.0398769  0.3732102
+sample estimates:
+mean of the differences
+             -0.8333333
+\end{Soutput}
+\end{Schunk}
+

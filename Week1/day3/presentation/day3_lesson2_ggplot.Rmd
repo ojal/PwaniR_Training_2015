@@ -1,0 +1,218 @@
+---
+title: "Graphs with ggplot"
+author: "Ken Mwai"
+output:
+  beamer_presentation:
+    theme: "CambridgeUS"
+    colortheme: "sidebartab"
+framework   : io2012
+fontsize: 11pt 
+---
+
+## What is ggplot2?
+
+- An implementation of the __Grammar of Graphics__ by Leland Wilkinson
+- Grammar of graphics represents and abstraction of graphics ideas/objects
+- Think “verb”, “noun”, “adjective” for graphics
+- Allows for a “theory” of graphics on which to build new graphics and graphics objects
+
+
+## Basic Components of a ggplot2 Plot
+- A _data frame_
+- _aesthetic mappings_: how data are mapped to color, size 
+- _geoms_: geometric objects like points, lines, shapes. 
+- _facets_: for conditional plots. 
+- _stats_: statistical transformations like binning, quantiles, smoothing. 
+- _scales_: what scale an aesthetic map uses (example: male = red, female = blue). 
+- _coordinate system_ 
+
+## Basic Quick Plot
+
+- Load the maltreat dataset 
+
+```{r , echo=FALSE , results='hide'}
+library(knitr)
+opts_chunk$set(out.width='200px', dpi=200 , fig.align ='center', warning=FALSE , message=F)
+maltreat<-read.csv("maltreat.csv")
+maltreat<-subset(maltreat, sex!="")
+```
+
+```{r , warning=FALSE ,echo=T}
+library(ggplot2)
+qplot(x = weight , data = maltreat )
+```
+
+
+## Basic Quick scatter plot
+
+```{r , warning=FALSE}
+library(ggplot2)
+qplot(x = weight  , y=heartrate, data = maltreat )
+```
+
+
+## Build your graph in layers
+  Basic Components of a ggplot2 Plot
+  ---------------------------------
+      - A _data frame_
+      - _aesthetic mappings_: how data are mapped to color, size 
+      - _geoms_: geometric objects like points, lines, shapes. 
+      - _facets_: for conditional plots. 
+      - _stats_: statistical transformations like binning, quantiles, smoothing. 
+      - _scales_: what scale an aesthetic map uses (example: m = red, f = blue). 
+      - _coordinate system_ 
+      
+* * *      
+
+ - ggplot(df -- **Data**, aes(x, y, <other aesthetics>) -- **what to map**) \newline
+ + geoms_ **what type of graph**
+ 
+## Types of Geoms
+   - geom_bar() for **bar graphs**
+   - geom_histogram() for **histograms** -- diff??
+   - geom_line() for **line graphs** 
+   - geom_boxplot()  **Box and whiskers plot**
+   - geom_errorbar() **Error bars.**
+   
+   
+## Example - Box Plot
+```{r}
+boxplot(maltreat$weight)
+```
+
+* * *
+  - call library(ggplot2)
+  - ggplot(data = maltreat)
+  - ggplot(data = maltreat , aes(weight))
+  
+```{r}
+library(ggplot2)
+g <- ggplot(data = maltreat , aes(weight))
+```
+
+* * *
+ - ggplot(data = maltreat , aes(weight)) + geom_boxplot()
+ 
+```{r}
+library(ggplot2)
+ggplot(data = maltreat , aes(x=weight , y=weight)) +
+  geom_boxplot()
+```
+
+
+## Boxplot of weight and sex 
+```{r}
+boxplot(maltreat$weight~maltreat$sex,col="grey")
+```
+
+ - Prepare in ggplot2
+
+* * *
+- This is it
+
+
+})
+```{r}
+library(ggplot2)
+ggplot(data = maltreat , aes(x=sex , y=weight)) + 
+  geom_boxplot(fill = "red")
+```
+
+* * *
+ 
+```{r}
+library(ggplot2)
+ggplot(data = maltreat , aes(x=sex ,
+                    y=weight ,fill=paying)) + 
+  geom_boxplot()
+```
+
+## Histogram of weight 
+```{r}
+hist(maltreat$weight, col="grey")
+```
+
+ - Prepare in ggplot2
+ 
+ 
+ * * *
+- This is the Histogram
+ 
+```{r}
+library(ggplot2)
+ggplot(data = maltreat , aes(weight)) + geom_histogram()
+```
+
+
+## Scatter of weight  vs heartrate
+```{r}
+plot(maltreat$weight,maltreat$heartrate, pch=19,col="blue")
+```
+
+ - Prepare in ggplot2
+ 
+ 
+ * * *
+- This is the scatter
+ 
+```{r}
+library(ggplot2)
+ggplot(data = maltreat , aes(x=weight , y=heartrate)) + 
+  geom_point()
+```
+
+
+## Bar plot of sex
+```{r}
+barplot(table(maltreat$sex))
+```
+
+ - Prepare in ggplot2
+ 
+ 
+ * * *
+- This is the barplot \\o/
+ 
+```{r}
+library(ggplot2)
+ggplot(data = maltreat , aes(sex)) + geom_bar(fill='grey') +
+  theme_bw() + ggtitle("Barplot of gender")
+```
+
+
+## A detailed boxplot
+
+- draw a boxplot of resprate by gender 
+- filled by paying
+- has a titlle
+- has an xlabel
+- has a y label
+- saved in png
+
+* * *
+Like This 
+
+```{r, warning=FALSE,echo=FALSE}
+library(ggplot2)
+maltreat$paying<- factor(maltreat$paying,
+levels = c("","Yes"),
+labels = c("No", "Yes")) 
+ggplot(data = maltreat , aes(x=sex , y=resprate ,fill=paying)) +
+  geom_boxplot(position=position_dodge(.8)) + 
+  ggtitle("A box blot of Resprate by gender") +
+  xlab("Gender") + ylab("Resprate") +
+  theme_bw() 
+```
+
+* * *
+```{r, warning=FALSE,echo=T , size="tiny"}
+library(ggplot2)
+maltreat$paying<- factor(maltreat$paying,
+levels = c("","Yes"),
+labels = c("No", "Yes")) 
+ggplot(data = maltreat , aes(x=sex , y=resprate ,fill=paying)) +
+  geom_boxplot(position=position_dodge(.8)) + 
+  ggtitle("A box blot of Resprate by gender") +
+  xlab("Gender") + ylab("Resprate") +
+  theme_bw() 
+```

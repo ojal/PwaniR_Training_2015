@@ -1,0 +1,22 @@
+\frametitle{Calculations with assignment statements}
+We can store a value(s) in an R object using the assignment symbol $<-$ ("less than" followed by a hyphen)
+\begin{Schunk}
+\begin{Sinput}
+> x <- 2.5
+\end{Sinput}
+\end{Schunk}
+To check what is in a variable type the variable name
+\begin{Schunk}
+\begin{Sinput}
+> x
+\end{Sinput}
+\begin{Soutput}
+[1] 2.5
+\end{Soutput}
+\end{Schunk}
+Can store a computation under a new R object or change the current value stored in an old object
+\begin{Schunk}
+\begin{Sinput}
+> y <- 3*log(x)
+\end{Sinput}
+\end{Schunk}
