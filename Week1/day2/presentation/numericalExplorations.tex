@@ -1,213 +1,401 @@
-\documentclass{beamer}
+\documentclass{beamer}\usepackage[]{graphicx}\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
 \mode<presentation>{}
 \usetheme{CambridgeUS}
 \usecolortheme{sidebartab}
 %\pdfmapfile{+sansmathaccent.map}
 \title{Numerical explorations with R}
-\subtitle{means, median, SD; use R as calc}
+% \subtitle{means, median, SD; use R as calc}
 \author{Amos Thairu}
-\usepackage{Sweave}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \begin{document}
-\input{numericalExplorations-concordance}
+% \SweaveOpts{concordance=TRUE}
 \begin{frame}
 \titlepage
 \end{frame}
 
-\begin{frame}[fragile]\frametitle{Import data}
-\begin{Schunk}
-\begin{Sinput}
-> #import dataset
-> data <- read.csv("bwmal.csv")
-\end{Sinput}
-\end{Schunk}
+% data <- read.csv('H:/PwaniStatsCourse/PwaniR_Training_2015/PwaniR_Training_2015/Week1/day2/presentation/bwmal.csv')
+% bwmal_subset <- data[c(1:10,190:200),-c(1,9:12)]
+% row.names(data) <- NULL
+% write.csv(bwmal_subset, 'H:/PwaniStatsCourse/PwaniR_Training_2015/PwaniR_Training_2015/Week1/day2/presentation/bwmal_subset.csv')
+
+\begin{frame}[fragile]\frametitle{Reading data files}
+Import dataset
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{data} \hlkwb{<-} \hlkwd{read.csv}\hlstd{(}\hlstr{"bwmal_subset.csv"}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
 \pause
-\begin{Schunk}
-\begin{Sinput}
-> dim(data) #Returns the dimension of the dataset
-\end{Sinput}
-\begin{Soutput}
-[1] 791  12
-\end{Soutput}
-\end{Schunk}
+\begin{itemize}
+  \item Once read in, assigning the loaded data to objects
+  \item Datasets in R are typically stored as data frames, which have a matrix structure 
+  \item Observations are arranged as rows and variables, either numerical or categorical, are arranged as columns
+  \item Dataset contains 8 demographic variables for 20 individuals
+\end{itemize}
 \pause
-\begin{Schunk}
-\begin{Sinput}
-> names(data) #Returns variable names of the dataset
-\end{Sinput}
-\begin{Soutput}
- [1] "X"        "matage"   "mheight"  "gestwks"  "sex"      "bweight" 
- [7] "smoke"    "pfplacen" "parity"   "workload" "matagegp" "gestcat" 
-\end{Soutput}
-\end{Schunk}
+Get the dimension of the dataset
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{dim}\hlstd{(data)}
+\end{alltt}
+\begin{verbatim}
+## [1] 21  8
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
 \end{frame}
 
-\begin{frame}[fragile]\frametitle{View data}
-\begin{Schunk}
-\begin{Sinput}
-> head(data) #Returns first six rows of dataset
-\end{Sinput}
-\begin{Soutput}
-  X matage mheight gestwks sex bweight smoke pfplacen parity workload matagegp
-1 1     26   1.575      40   0    3.11     0        0      3        0        3
-2 2     23   1.529      40   0    2.65     0        0      1        0        3
-3 3     18   1.540      40   1    3.41     0        0      0        0        1
-4 4     25   1.581      40   1    2.99     0        0      2        0        3
-5 5     25   1.555      40   1    3.16     0        0      1        1        3
-6 6     21   1.561      40   1    2.82     0        0      1        1        2
-  gestcat
-1       2
-2       2
-3       2
-4       2
-5       2
-6       2
-\end{Soutput}
-\end{Schunk}
+\begin{frame}[fragile]\frametitle{Viewing data}
+\small
+Explore variable names of the dataset
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{names}\hlstd{(data)}
+\end{alltt}
+\begin{verbatim}
+## [1] "X"        "matage"   "mheight"  "gestwks"  "sex"      "bweight" 
+## [7] "smoke"    "pfplacen"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+R has ways to look at the dataset at a glance
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{head}\hlstd{(data)}  \hlcom{#Returns first six rows of dataset}
+\end{alltt}
+\begin{verbatim}
+##   X matage mheight gestwks sex bweight smoke pfplacen
+## 1 1     26   1.575      40   0    3.11     0        0
+## 2 2     23   1.529      40   0    2.65     0        0
+## 3 3     18   1.540      40   1    3.41     0        0
+## 4 4     25   1.581      40   1    2.99     0        0
+## 5 5     25   1.555      40   1    3.16     0        0
+## 6 6     21   1.561      40   1    2.82     0        0
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
 \end{frame}
 
-\begin{frame}[fragile]\frametitle{Some data explorations}
-\begin{Schunk}
-\begin{Sinput}
-> #some data explorations
-> mean(data$mheight)
-\end{Sinput}
-\begin{Soutput}
-[1] 1.543273
-\end{Soutput}
-\end{Schunk}
+\begin{frame}[fragile]\frametitle{Viewing data}
+\small
+We can access variables directly by using their names, using the object \$ variable notation
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{data}\hlopt{$}\hlstd{gestwks}
+\end{alltt}
+\begin{verbatim}
+##  [1] 40 40 40 40 40 40 41 38 40 41 39 38 39 39 39 37 39 39 39 40 39
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+Check last six rows of the dataset
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{tail}\hlstd{(data)}  \hlcom{#Returns first six rows of dataset}
+\end{alltt}
+\begin{verbatim}
+##      X matage mheight gestwks sex bweight smoke pfplacen
+## 16 195     19   1.583      37   0    2.42     0        0
+## 17 196     20   1.534      39   1    2.93     0        0
+## 18 197     30   1.543      39   0    2.59     1        1
+## 19 198     38   1.602      39   0    2.48     1        0
+## 20 199     20   1.540      40   1    3.02     1        1
+## 21 200     24   1.503      39   0    2.79     0        1
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\end{frame}
+% 
+\begin{frame}[fragile]\frametitle{Viewing data}
+% \small
+To access a certain entry, we most commonly use object[row,column] \\
+Single cell value
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{data[}\hlnum{2}\hlstd{,} \hlnum{3}\hlstd{]}
+\end{alltt}
+\begin{verbatim}
+## [1] 1.529
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+Omitting row value implies all rows; here all rows in column 3
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{data[,} \hlnum{3}\hlstd{]}
+\end{alltt}
+\begin{verbatim}
+##  [1] 1.575 1.529 1.540 1.581 1.555 1.561 1.590 1.502 1.666 1.591 1.567
+## [12] 1.566 1.540 1.502 1.560 1.583 1.534 1.543 1.602 1.540 1.503
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{More data viewing}
+Omitting column values implies all columns; here all columns in row 2
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{data[}\hlnum{2}\hlstd{, ]}
+\end{alltt}
+\begin{verbatim}
+##   X matage mheight gestwks sex bweight smoke pfplacen
+## 2 2     23   1.529      40   0    2.65     0        0
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+Can also use ranges - rows 2 and 3, columns 2 and 3
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{data[}\hlnum{2}\hlopt{:}\hlnum{3}\hlstd{,} \hlnum{2}\hlopt{:}\hlnum{3}\hlstd{]}
+\end{alltt}
+\begin{verbatim}
+##   matage mheight
+## 2     23   1.529
+## 3     18   1.540
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\end{frame}
+
+% \normal
+\begin{frame}[fragile]\frametitle{Data summaries}
+\begin{itemize}
+  \item Enables us to see the main characteristics of data before any formal modeling or hypothesis testing
+  \item Particular techniques depends on the type of variable: Continuous or categorical
+  \item Continuous eg. age, height
+  \item Categorical eg. smoking status, sex
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Some data explorations: Continuous variables}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# some data explorations}
+\hlkwd{mean}\hlstd{(data}\hlopt{$}\hlstd{mheight)}
+\end{alltt}
+\begin{verbatim}
+## [1] 1.559
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
 \pause
-\begin{Schunk}
-\begin{Sinput}
-> var(data$mheight)
-\end{Sinput}
-\begin{Soutput}
-[1] 0.002884892
-\end{Soutput}
-\end{Schunk}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{var}\hlstd{(data}\hlopt{$}\hlstd{mheight)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.001461
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
 \pause
-\begin{Schunk}
-\begin{Sinput}
-> sd(data$matage)
-\end{Sinput}
-\begin{Soutput}
-[1] 5.139645
-\end{Soutput}
-\end{Schunk}
-\pause
-\begin{Schunk}
-\begin{Sinput}
-> median(data$matage)
-\end{Sinput}
-\begin{Soutput}
-[1] 23
-\end{Soutput}
-\end{Schunk}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{sd}\hlstd{(data}\hlopt{$}\hlstd{matage)}
+\end{alltt}
+\begin{verbatim}
+## [1] 5.528
+\end{verbatim}
+\begin{alltt}
+\hlkwd{median}\hlstd{(data}\hlopt{$}\hlstd{matage)}
+\end{alltt}
+\begin{verbatim}
+## [1] 22
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+% \pause
+% <<tidy=TRUE>>=
+% median(data$matage)
+% @
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{More data explorations}
-\begin{Schunk}
-\begin{Sinput}
-> summary(data$matage)  #sumarize continous variable
-\end{Sinput}
-\begin{Soutput}
-   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-  13.00   20.00   23.00   23.78   27.00   46.00 
-\end{Soutput}
-\end{Schunk}
+Produce various summaries of continous variable
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{summary}\hlstd{(data}\hlopt{$}\hlstd{matage)}  \hlcom{#sumarize continous variable}
+\end{alltt}
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    17.0    20.0    22.0    23.6    25.0    38.0
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Explorations for categorical variables}
-\begin{Schunk}
-\begin{Sinput}
-> table(data$sex)  #summarize categorical variable
-\end{Sinput}
-\begin{Soutput}
-  0   1 
-381 410 
-\end{Soutput}
-\end{Schunk}
-\pause
-\begin{Schunk}
-\begin{Sinput}
-> table(data$sex,data$smoke) #cross-tabulation of two categorical variables
-\end{Sinput}
-\begin{Soutput}
-      0   1
-  0 346  35
-  1 378  32
-\end{Soutput}
-\end{Schunk}
-\pause
-\begin{Schunk}
-\begin{Sinput}
-> with(data, table(sex,smoke)) #Alternatively, with variable labels
-\end{Sinput}
-\begin{Soutput}
-   smoke
-sex   0   1
-  0 346  35
-  1 378  32
-\end{Soutput}
-\end{Schunk}
+Summarize single categorical variable
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{table}\hlstd{(data}\hlopt{$}\hlstd{sex)}
+\end{alltt}
+\begin{verbatim}
+## 
+##  0  1 
+## 11 10
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+Cross-tabulation of two categorical variables
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{table}\hlstd{(data}\hlopt{$}\hlstd{sex, data}\hlopt{$}\hlstd{smoke)}
+\end{alltt}
+\begin{verbatim}
+##    
+##     0 1
+##   0 8 3
+##   1 9 1
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Alternative cross tabulation}
+Using \emph{'with'} command includes variable labels in the table
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{with}\hlstd{(data,} \hlkwd{table}\hlstd{(sex, smoke))}
+\end{alltt}
+\begin{verbatim}
+##    smoke
+## sex 0 1
+##   0 8 3
+##   1 9 1
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Use R as calculator}
-\begin{Schunk}
-\begin{Sinput}
-> #enter the expression that we want evaluated and hit enter
-> 1000-2*10^2/(8+2)
-\end{Sinput}
-\begin{Soutput}
-[1] 980
-\end{Soutput}
-\end{Schunk}
-\begin{Schunk}
-\begin{Sinput}
-> #Built-in functions:
-> log(1.4)  #returns the natural logarithm of the number 1.4
-\end{Sinput}
-\begin{Soutput}
-[1] 0.3364722
-\end{Soutput}
-\begin{Sinput}
-> log10(1.4)  # returns the log to the base of 10
-\end{Sinput}
-\begin{Soutput}
-[1] 0.146128
-\end{Soutput}
-\begin{Sinput}
-> sqrt(16)  #returns the square root of 16
-\end{Sinput}
-\begin{Soutput}
-[1] 4
-\end{Soutput}
-\end{Schunk}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlnum{1000} \hlopt{-} \hlnum{2} \hlopt{*} \hlnum{10}\hlopt{^}\hlnum{2}\hlopt{/}\hlstd{(}\hlnum{8} \hlopt{+} \hlnum{2}\hlstd{)}  \hlcom{#expression to evaluate}
+\end{alltt}
+\begin{verbatim}
+## [1] 980
+\end{verbatim}
+\begin{alltt}
+\hlcom{# Built-in functions:}
+\hlkwd{log}\hlstd{(}\hlnum{1.4}\hlstd{)}  \hlcom{#returns the natural logarithm of the number 1.4}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.3365
+\end{verbatim}
+\begin{alltt}
+\hlkwd{log10}\hlstd{(}\hlnum{1.4}\hlstd{)}  \hlcom{# returns the log to the base of 10}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.1461
+\end{verbatim}
+\begin{alltt}
+\hlkwd{sqrt}\hlstd{(}\hlnum{16}\hlstd{)}  \hlcom{#returns the square root of 16}
+\end{alltt}
+\begin{verbatim}
+## [1] 4
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Calculations with assignment statements}
-\begin{Schunk}
-\begin{Sinput}
-> #we can store a value(s) under some variable name using the assignment symbol <- 
-> #("less than" followed by a hyphen)
-> x <- 2.5
-> #to know what is in a variable type the variable name
-> x
-\end{Sinput}
-\begin{Soutput}
-[1] 2.5
-\end{Soutput}
-\begin{Sinput}
-> #can store a computation under a new variable name or change the current value in an old variable
-> y <- 3*log(x)
-\end{Sinput}
-\end{Schunk}
+We can store a value(s) in an R object using the assignment symbol $<-$ ("less than" followed by a hyphen)
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{x} \hlkwb{<-} \hlnum{2.5}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+To check what is in a variable type the variable name
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{x}
+\end{alltt}
+\begin{verbatim}
+## [1] 2.5
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+Can store a computation under a new R object or change the current value stored in an old object
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{y} \hlkwb{<-} \hlnum{3} \hlopt{*} \hlkwd{log}\hlstd{(x)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
 \end{frame}
 
 \end{document}
-
-%more on using R as a calculator
-%more on summary stats
-%max(x) 
-%?with
-
-
