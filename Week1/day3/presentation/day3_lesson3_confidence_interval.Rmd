@@ -1,6 +1,6 @@
 ---
 title: "Confidence Intervals"
-author: "Ouseman Abdullahi"
+author: "Dr. Osman Abdullahi"
 output:
   beamer_presentation:
     theme: "CambridgeUS"

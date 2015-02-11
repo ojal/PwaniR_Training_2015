@@ -1,6 +1,6 @@
 ---
 title: "Graphs with ggplot"
-author: "Ken Mwai"
+author: "Mike Ooko"
 output:
   beamer_presentation:
     theme: "CambridgeUS"

@@ -96,11 +96,11 @@ Decide on study design
 ----------------------
 
 - Descriptive 
-  - Cross sectional 
+    - Cross sectional 
 
 - Analytical 
-  - Case-control
-  - Cohort
+    - Case-control
+    - Cohort
 
 - Experimental 
 
@@ -120,8 +120,8 @@ Decide on study design
 - Unordered categorical variables
     - Marital status
         - married, divorced etc
-    - Residence
-        - rural or urban
+    - Ethnic group
+        - Kikuyu, Luo, Kamba
     - none is higher than the other 
 - Ordinal categorical variables
     - Wealth quantiles
@@ -141,7 +141,7 @@ Decide on study design
 
 ***
 
-![](Sampling-3.png)
+![](Sampling-5.png)
 
 ## Statistics 
 - Allow us to use the sample to make inferences about the population from which it was derived……

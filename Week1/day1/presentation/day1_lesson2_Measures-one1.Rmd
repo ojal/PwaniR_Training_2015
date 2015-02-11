@@ -41,7 +41,7 @@ framework   : io2012
 
 - Mean
     - sum of all observations divided by number of observations
-       $$xi/n$$
+       $$\frac{\sum xi}{n}$$
 
 ## library books illustrations
 
@@ -86,7 +86,7 @@ framework   : io2012
 - Can be defined in terms of how close the scores are to the middle of the distribution(mean)
 - This variability or variance can be measured in terms of how far observations are from the mean on average i.e. how far, on average, each observation deviates from the mean. 
 - variance = by dividing the sum of squares of these deviations by (n‑1). 
-- The formula for the variance is: $$(xi - x)2 / (n-1)$$
+- The formula for the variance is: $$\frac{\sum(xi - x)^2}{(n-1)}$$
 
 
 ***
