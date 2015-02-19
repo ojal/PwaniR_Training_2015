@@ -1,5 +1,5 @@
 ---
-title: "Binary, ch-square, associations"
+title: "Binary, Chi-square, associations"
 author: "Osman Abdullahi"
 output:
   beamer_presentation:
@@ -39,7 +39,7 @@ Proportion  p  = Number positive
             
 The standard error of the proportion (large sample, normal approx).
 
- Standard error of  $p = SE (p)   =  { (p) (1-p) n }$
+ Standard error of  $p = SE (p)   =  \frac{ (p) (1-p)}{ n }$
  
 ### Summary of SE
 
@@ -58,9 +58,9 @@ The standard error of the proportion (large sample, normal approx).
 From our sample we estimated:
   the proportion positive $p = \frac{(pos) }{(total in sample)}$
   And the standard error of $p= SE(p) =  \frac{ (p) (1-p)} {n}$
-Using the normal approximation we can obtain 95% CI of our estimate : $p – 1.96(SE) to p+ 1.96(SE)$
+Using the normal approximation we can obtain 95% CI of our estimate : 
+$p-1.96(SE) , p+ 1.96(SE)$
 
-  95% CI 
 
 The meaning of the 95% CI is we are 95% sure the true proportion P lies is covered by this interval.
 
@@ -125,9 +125,9 @@ Difference between two proportions is:   p1 - p2
 
 Standard error of $(p1 - p2)$ for the 95% CI
 
-               $$
-               SE = \sqrt{\frac{(p1(1 - p1)}{n1} + \frac{p2(1 - p2)}{n2)}}
-               $$
+$$
+SE = \sqrt{\frac{(p_1(1 - p_1)}{n_1} + \frac{p_2(1 - p_2)}{n_2)}}
+$$
                 
 Then calculate the 95% CI using the standard method:
 
@@ -162,10 +162,7 @@ The calculation of the standard error of the difference in proportions for the h
 
 This is because the hypothesis test assumes there is no difference (the NULL hypothesis), whereas the 95% CI assumes there is a difference (and we want to quantify the uncertainty around the difference).
 
-### Session 3: Chi- squared test
-see
-
-### Comparing proportions - chi-squared test
+### Session 3: Chi- squared test - Comparing proportions - chi-squared test
 
 Comparing two (or more) proportions 
 

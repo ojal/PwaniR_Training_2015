@@ -1,0 +1,245 @@
+\documentclass[slidestop,compress,14pt,xcolor=dvipsnames]{beamer}
+\usepackage{lmodern}
+\usepackage{graphicx} %package for attaching images
+%\usetheme{Madrid}
+%\usetheme{Ilmenau}
+\usetheme{CambridgeUS}
+ %verbatim
+\mode<presentation>
+\setbeamercolor{section in head}{parent=palette quaternary}
+
+\makeatletter
+\setbeamertemplate{}
+{%
+\vskip-9ex%
+\begin{beamercolorbox}{}
+\hfill\usebeamercolor[fg]{navigation symbols dimmed}%
+    \insertslidenavigationsymbol
+    \insertframenavigationsymbol
+    \insertsubsectionnavigationsymbol
+    \insertsectionnavigationsymbol
+    \insertdocnavigationsymbol
+    \insertbackfindforwardnavigationsymbol
+  \end{beamercolorbox}%    
+  \begin{beamercolorbox}[ht=2ex,dp=3ex]{section in head}%
+    \insertnavigation{\paperwidth}
+  \end{beamercolorbox}%
+}%
+\makeatother
+
+\author{Ken Mwai}
+\institute{Pwani-University R WorkShop}
+
+\usepackage{Sweave}
+\begin{document}
+\input{day4.Lesson2.correlation-concordance}
+\section{Correlation}
+\begin{frame}{Title}
+\vspace*{\fill}
+\begin{center}
+Correlation
+\end{center}
+\vspace*{\fill}
+\end{frame}
+
+\section{Overview}
+\subsection{Introduction}
+\begin{frame}{Overview}
+\begin{itemize}
+    \item  Correlation is made of {\bf Co- } (meaning "together"), and {\bf Relation }
+    \item Statistical procedure used to measure and describe the relationship between two variables 
+    \item Range between +1 and -1
+      \begin{itemize}
+        \item Positive when the values increase together
+        \item Negative when one value decreases as the other increases 
+      \end{itemize}
+\ldots
+\end{itemize}
+\end{frame}
+\begin{frame}{Overview cont..}
+\begin{itemize}
+  \item +1 is a perfect positive correlation
+  \item 0 is no correlation (independence)
+  \item -1 is a perfect negative correlation
+\end{itemize}
+\includegraphics[scale=0.5]{corelation}
+\end{frame}
+\subsection{Uses}
+\begin{frame}{Use of Corelation}
+When two variables, let's call them X  Y, are correlated, then one variable can be
+used to predict the other variable \newline
+Example:IQ and perfomance...
+
+\end{frame}
+
+\section{Types}
+\begin{frame}{Types}
+\begin{itemize}
+  \item {\bf Pearson product-moment correlation} -When both variables, X and Y, are continuous
+  \item {\bf Point bi-serial correlation} - When 1 variable is continuous and 1 is dichotomous
+  \item {\bf Phi coefficient} - When both variables are dichotomous
+  \item {\bf Spearman rank correlation} - When both variables are ordinal (ranked data)
+\end{itemize}
+\end{frame}
+
+
+\section{Calculation}
+\begin{frame}{Calculation of Correlation}
+defined as \newline 
+\begin{center}
+$r = S_{xy}/\sqrt{S_{xx}S_{yy}}.$ 
+\end{center}
+where 
+\begin{center} $S_{xx} = \sum\limits_{i = 1}^N {\left( {x_i - \bar x} \right)^2}$ {(variance of x)} \end{center}
+and
+\begin{center} 
+$S_{xy} = \sum\limits_{i = 1}^N {\left( {x_i - \bar x} \right)} {\left( {y_i - \bar y} \right)}$ {(covariance of x and y)}
+\end{center}
+\end{frame}
+
+
+\section{Exercise}
+\subsection{manual}
+%\begin{frame}{Exercise - Desk Work}
+
+%\begin{tabular}
+\begingroup
+\fontsize{7pt}{9pt}\selectfont
+
+\begin{Schunk}
+\begin{Sinput}
+> print(df)
+\end{Sinput}
+\begin{Soutput}
+   temp icecream
+1  14.2      215
+2  16.4      325
+3  11.9      185
+4  15.2      332
+5  18.5      406
+6  22.1      522
+7  19.4      412
+8  25.1      614
+9  23.4      544
+10 18.1      421
+11 22.6      445
+12 17.2      408
+\end{Soutput}
+\end{Schunk}
+
+
+
+%\end{tabular}
+%\end{frame}
+
+\subsection{Output}
+%\begin{frame}{Another title}
+
+\clearpage 
+
+\begin{Schunk}
+\begin{Sinput}
+> print(df)
+\end{Sinput}
+\begin{Soutput}
+   temp icecream deviationTemp deviationIce         SSxy      SSxx        SSyy
+1  14.2      215        -4.475  -187.416667  838.6895833 20.025625 35125.00694
+2  16.4      325        -2.275   -77.416667  176.1229167  5.175625  5993.34028
+3  11.9      185        -6.775  -217.416667 1472.9979167 45.900625 47270.00694
+4  15.2      332        -3.475   -70.416667  244.6979167 12.075625  4958.50694
+5  18.5      406        -0.175     3.583333   -0.6270833  0.030625    12.84028
+6  22.1      522         3.425   119.583333  409.5729167 11.730625 14300.17361
+7  19.4      412         0.725     9.583333    6.9479167  0.525625    91.84028
+8  25.1      614         6.425   211.583333 1359.4229167 41.280625 44767.50694
+9  23.4      544         4.725   141.583333  668.9812500 22.325625 20045.84028
+10 18.1      421        -0.575    18.583333  -10.6854167  0.330625   345.34028
+11 22.6      445         3.925    42.583333  167.1395833 15.405625  1813.34028
+12 17.2      408        -1.475     5.583333   -8.2354167  2.175625    31.17361
+\end{Soutput}
+\begin{Sinput}
+> print(sum.SSxy)
+\end{Sinput}
+\begin{Soutput}
+[1] 5325.025
+\end{Soutput}
+\begin{Sinput}
+> print(sum.SSxx)
+\end{Sinput}
+\begin{Soutput}
+[1] 176.9825
+\end{Soutput}
+\begin{Sinput}
+> print(sum.SSyy)
+\end{Sinput}
+\begin{Soutput}
+[1] 174754.9
+\end{Soutput}
+\end{Schunk}
+
+
+
+%\end{frame}
+\section{Corelation}
+\subsection{Corelation in R}
+\clearpage
+%\begin{frame}{Corelation in R}
+\begin{Schunk}
+\begin{Sinput}
+> cor(df$temp,df$icecream)
+\end{Sinput}
+\begin{Soutput}
+[1] 0.9575066
+\end{Soutput}
+\begin{Sinput}
+> cor.test(df$temp,df$icecream)
+\end{Sinput}
+\begin{Soutput}
+	Pearson's product-moment correlation
+
+data:  df$temp and df$icecream
+t = 10.4986, df = 10, p-value = 1.016e-06
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ 0.8515370 0.9883148
+sample estimates:
+      cor 
+0.9575066 
+\end{Soutput}
+\end{Schunk}
+%\end{frame}
+{\bf Diff btwn cor and cor.test}
+The cor.test output also includes the point estimate reported by cor
+Cor.test has p-value and also CI
+
+\clearpage
+
+\fontsize{12pt}{14pt}\selectfont
+
+\subsection{Caution}
+\begin{frame}{Caution}
+\begin{itemize}
+\item {\bf !"Correlation Is Not Causation" ... }\newline
+When there is a correlation it does not mean that one thing causes the other
+\item The magnitude of a correlation depends upon
+many factors, including 
+\begin{itemize}
+\item Sampling (random and representative?)
+\item Measurement of X and Y and Several other assumptions 
+\ldots
+\end{itemize}
+\ldots
+\end{itemize}
+\end{frame}
+
+\section{Assumptions}
+\subsection{Assumptions}
+\begin{frame}{Assumptions}
+\begin{itemize}
+    \item Normal Distribution for X and Y if not specifying the method - Use method="Spearman" for non-normal data.
+    \item Linear relationship between X and Y
+    \item {\bf Homoscedasticity} - homogeneity of variance/ uniformity of variance 
+    leveneTest() from car package is used to test this
+\end{itemize}
+\end{frame}
+
+\end{document}

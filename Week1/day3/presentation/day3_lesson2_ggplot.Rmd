@@ -205,7 +205,7 @@ ggplot(data = maltreat , aes(x=sex , y=resprate ,fill=paying)) +
 ```
 
 * * *
-```{r, warning=FALSE,echo=T , size="tiny"}
+```{r, warning=FALSE,echo=T , size="tiny",echo=FALSE}
 library(ggplot2)
 maltreat$paying<- factor(maltreat$paying,
 levels = c("","Yes"),
