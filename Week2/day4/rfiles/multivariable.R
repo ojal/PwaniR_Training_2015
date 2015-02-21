@@ -1,0 +1,2 @@
+library(timereg)
+data(melanoma)

@@ -1,0 +1,6 @@
+install.packages("phia")
+library(phia)
+help(phia)
+some(Boik)
+mod.boik <- lm(edr ~ therapy*medication, data=Boik)
+summary(mod.boik)
