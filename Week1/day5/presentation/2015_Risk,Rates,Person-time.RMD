@@ -1,0 +1,48 @@
+---
+title: "Risk,Rates and Person time"
+author: "Mark Otiende"
+output:
+  beamer_presentation:
+    theme: "CambridgeUS"
+    colortheme: "sidebartab"
+framework   : io2012
+---
+
+## Session Objecives
+
+1. Distinction between risks and rates
+2. How ro calculate rates and person time
+3. How to calculate and interprate confidence intervals for rates
+4. How to compare two rates using rate ratio
+
+## Definations
+
+- Risk
+- Rate
+- Person time
+
+## Definations
+
+ Risk
+-------
+Probability of death in five years following diagnosis of Prostate cancer is defined as the proportion of times that this would occur among a large number of men diagnosed with prostate cancer. The probability is then said to be the risk of death in the five year following diagnosis of prostate cancer
+
+## Definations
+
+Rate
+-----
+Measured in follow up studies and are the fundamental measure of the frequency of occurrence of an outcome over time. Measures the number of new events that occur per person unit time.
+
+e.g. the incidence rate of prostate cancer is 74.3/100000 men/year 
+Mortality rate for children less than five years in Kilifi county is 30 per 1000 child-years
+
+
+## Definations
+
+Person time
+-----------
+
+Period of observation/follow-up-time. Starts when an individual joins a study and stops when they experience the outcome of interest, or are lost to follow-up or the follow-up period ends, whichever happens first
+
+![](person_time.png)
+

@@ -1,0 +1,157 @@
+---
+title: "Risk,Rates and Person time"
+author: "Mark Otiende"
+output:
+  beamer_presentation:
+    colortheme: sidebartab
+    theme: CambridgeUS
+  slidy_presentation: default
+framework: io2012
+---
+
+## Session Objecives
+
+1. Distinction between risks and rates
+2. How ro calculate rates and person time
+3. How to calculate and interprate confidence intervals for rates
+4. How to compare two rates using rate ratio
+
+## Definations
+
+- Risk
+- Rate
+- Person time
+
+## Definations
+__Risk__
+
+Probability of death in five years following diagnosis of Prostate cancer is defined as the proportion of times that this would occur among a large number of men diagnosed with prostate cancer. The probability is then said to be the risk of death in the five year following diagnosis of prostate cancer
+
+## Definations
+__Rate__
+
+Measured in follow up studies and are the fundamental measure of the frequency of occurrence of an outcome over time. Measures the number of new events that occur per person unit time.
+
+e.g. the incidence rate of prostate cancer is 74.3/100000 men/year 
+Mortality rate for children less than five years in Kilifi county is 30 per 1000 child-years
+
+
+## Definations
+__Person time__
+
+Period of observation/follow-up-time. Starts when an individual joins a study and stops when they experience the outcome of interest, or are lost to follow-up or the follow-up period ends, whichever happens first
+
+![](person_time.png)
+
+## Definations
+__Person time__
+
+Period of observation/follow-up-time. Starts when an individual joins a study and stops when they experience the outcome of interest, or are lost to follow-up or the follow-up period ends, whichever happens first
+
+__Censoring__
+
+![](censoring.png)
+
+## Basic theory of survival analysis
+Computation of the Survivorship function - $S(t)$
+
+Time,$t_i$   | #at risk $(n_t)$ | #of events $(d_t)$ |  $S(t)$                  |
+-------------|------------------|--------------------|--------------------------|
+ 0           |    20            |   0                | 1.00                     |
+ 5           |    20            |   2                | $[1-(2/20)]*1.00=0.90$   |
+ 6           |    18            |   0                | $[1-(0/18)]*0.90=0.90$   |
+ 10          |    15            |   1                | $[1-(1/15)]*0.90=0.84$   |
+ 13          |    14            |   2                | $[1-(2/14)]*0.84=0.72$   |
+
+$$
+S(t_1) =1-r_1=\frac{n_1-d_1}{n_1}
+$$
+
+$$
+S(t_j) =s(t_{(j-1)}) * s(t_j) = s_{t_{1}} * s_{t_{2}}*...*s_{t_{j}}
+$$
+
+
+## Calculating person-time and rates
+
+![](calculate.png)
+
+## Calculating person-time and rates
+
+__Person Years__
+
+$follow-uptimeinyears =(exitdate-startdate)/365.25$
+
+__Rate__
+
+Estimated from the study data by dividing the total number (d) of events observed by the total (T) of the individual person-years of observation.
+
+$$
+Rate, \lambda = \frac{number of events}{total person - years of observation} = \frac{d}{T}
+$$
+
+## Confidence Interval for a rate
+
+$$
+s.e(rate) = \frac{s.e.(mumber of events)}{T} = \frac{\sqrt d}{T} = \sqrt\frac{\lambda}{T}
+$$
+
+$$
+s.e(log rate) = \frac{1}{\sqrt d}
+$$
+
+
+$$
+ 95\% CI for log rate = log rate \pm 1.96 * \frac{1} {\sqrt d}
+$$
+
+## Desk work
+
+
+## Comparing Two Rates
+
+  1. Rate difference
+  2. Rate Ratio
+  3. Confidence interval for rte ratios
+  
+## Rate Difference
+
+Difference in rates of occurrence between two groups (exposed/non-exposed) in the population.
+
+$$
+rate difference = \lambda_1 -  \lambda_0
+$$
+
+$$
+s.e(rate difference) = \sqrt (\frac{d_1}{T_1^2} + \frac{d_0}{T_0^2})
+$$
+
+
+## Rate Ratio
+
+$$
+Rate ratio = \frac{rate in exposed}{rate in unexposed} = \frac{\lambda_1}{\lambda_0}
+$$
+
+$$
+s.e of log(rate ratio) = \sqrt (\frac{1}{d_1} + \frac{1}{d_0})
+$$
+
+## Confidence Intervals for Rate Ratios
+ 
+$95 \% CI = \frac{rate ratio} {EF}$ to $rate ratio * EF$
+    
+$$
+    EF=exp[1.96* s.e of log(rate ratio)]
+$$
+
+## Z-test for the rate ratio
+
+$$
+z = \frac{log(rate ratio)}{s.e of log(rate ratio)}
+$$
+
+Example
+
+
+## Practical and Review of Practical
