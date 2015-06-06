@@ -1,0 +1,104 @@
+---
+title: "Classical Analysis of Rates"
+author: "Phillip Ayieko"
+output:
+  beamer_presentation:
+    theme: "CambridgeUS"
+    colortheme: "sidebartab"
+framework   : io2012
+---
+
+
+##Objectives
+- Explain and compare the rates between two treatment groups
+
+- Understand weaknesses of "classical analysis" of rates - move to Poisson model
+
+##Rate
+- Number of events per unit time in a given number of people
+
+- For any group of people it is calculated as:
+
+$$
+\frac{number of observed events}{total time for which people were observed}
+$$
+
+- Difference between risk and rate:
+    - Risk: probability of experiencing an event
+    - Rate: probability of experiencing an event per   unit time
+
+##Rate
+- Rates are applied to individuals
+- They can only be measured from a group of participants
+- Key assumption: events occur uniformly over time i.e. rate is constant
+- Example: if 5 events occur in 100 men over 2 years, what is the event rate?
+    - No. of events: 5
+    - Total time of follow-up: $100 men x 2 years=200 person-years$
+    - $Event rate = 5/200 = 0.025 events per person-year$
+    
+## Rate Ratio
+- Its the ratio of two rates
+
+- Example: if 5 events occur in 100 men over 2 years, and 10 events occur in 100 women over 5 years, what is the rate ratio comparing event rates in men vs. women?
+    - Event rate for men = 5/200 = 0.025 events per person-year
+    - Event rate for women = 10/500 = 0.02 events per person
+    - Rate ratio comparing men to women = 0.025/0.02 = 1.25
+    - Interpretation: the event rate in men is 1.25 times that in women
+
+- Length of follow-up is different for men and women, but rate ratio is a standardised measure for different lengths of follow-up. It has no units.
+
+## Rate ratio
+- Comparing 2 groups with respect to exposure status:
+
+$$
+RATE ratio= \frac{Ratio in Exposed}{Rate in unexposed} 
+$$
+
+- Alternative ways of expressing this:
+    - $Rate in exposed = rate in unexposed x rate ratio$
+    - $Log(rate in exposed) = log(rate in unexposed) + log(rate ratio)$
+
+- If there is more than one exposure factor:
+    - $Log(rate in exposed) = log(rate in unexposed) + log(rate ratio for exposure 1) + log(rate ratio for exposure 2)$ e.t.c.
+        - Which is the Poisson model
+- A Poisson model is given by: $log(l) = Baseline + A + B$
+- Exponentiate result to get the rate
+
+## Using R
+- Using creditcards data - 'Classical' analysis of rates
+    - Compute the rate of group 1 (income)
+    - Compute the rate of group 2 (credit)
+    - Compute the rate ratio = use of credit card given income
+- With poisson model - The offset variable serves to normalize the fitted cell means per some space, grouping or time interval in order to model the rates.
+
+***
+
+```{r, echo=FALSE}
+data<- read.table("../data/creditcards.txt" , header = T)
+lcases <- log(data$Cases)
+data <- cbind(data,lcases)
+colnames(data)=c("income","cases","CrCards","lcases")  
+	## Fit the data with poisson linear model with offset=lcases 
+log.fit=glm(CrCards~income+offset(lcases),family=poisson,data=data	) 
+summary(log.fit) # to see the results
+```
+
+## Weaknesses of 'Classical' analysis of rates
+- The assumption of constant rate ratio (ranges between -inf to inf) = not true
+    - The rate ratio takes zero to infinity
+- We use log transform as an alternative 
+    - exponentiate back the results
+- Many simultaneous rates (combined effect of different exposures) cannot be analyzed "classically"
+- Cant tell weather the variable is a significant variable
+
+
+## Poisson regression Model for rate data
+- Assumptions for Poisson
+    - Log of disease rate changes linearly with equal increment increases in exposure variable
+    - **Change in the rate from combined effects of different exposures or risk factors are multiplicative**
+    - At each level of covariates the number of cases has variance equal to mean 
+    - Observations are independent
+
+
+## THANKS
+
