@@ -1,0 +1,36 @@
+---
+title: "Multivariable regression:"
+author: "Phillip Ayieko"
+header-includes:
+   - \usepackage{multicol}
+   - \usepackage{graphicx}
+output: pdf_document
+---
+
+```{r, eval=FALSE}
+
+install.packages(“faraway”)
+
+###Read the pima dataset using:
+library(faraway)
+data(pima)
+pima<-data.frame(pima)
+
+```
+
+
+Data description
+-------------------
+
+The National Institute of Diabetes and Digestive and Kidney Diseases conducted a study on 768 adult female Pima Indians living near Phoenix. The following variables were recorded: Number of times pregnant, Plasma glucose concentration a 2 hours in an oral glucose tolerance test, Diastolic blood pressure (mm Hg), Triceps skin fold thickness (mm), 2-Hour serum insulin (mu U/ml), Body mass index (weight in kg/(height in m2)), Diabetes pedigree function, Age (years) and a test whether the patient shows signs of diabetes (coded 0 if negative, 1 if positive).
+
+
+Questions
+----------
+
+a)	Fit the most parsimonious multiple regression explaining diastolic pressure (Remember the model may contain interactions)
+b)	Perform diagnostics on the best fitting model.
+c)	Interpret the coefficients where possible.
+
+Note:
+Can use similar codes as in SBP_code.R script for model building process!!

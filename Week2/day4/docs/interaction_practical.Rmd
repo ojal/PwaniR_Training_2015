@@ -1,0 +1,35 @@
+---
+title: "INTERACTION PRACTICAL: Logistic regression"
+author: "Phillip Ayieko"
+header-includes:
+   - \usepackage{multicol}
+   - \usepackage{graphicx}
+output: pdf_document
+---
+
+
+Generate data on gender admission patterns into a school’s departments A to F using the following code:
+
+```{r,eval=FALSE}
+data.logistic = data.frame(gender=rep(c("Male","Female"),c(6,6)), 
+                           dept=rep(LETTERS[1:6],2),
+                           yes=c(512,353,120,138,53,22,89,17,202,131,94,24),
+                           no=c(313,207,205,279,138,351,19,8,391,244,299,317))
+```
+
+
+a)	Model the admission probability using a logistic regression with an interaction. The codes below will help in this:
+```{r,eval=FALSE}    
+mod.form = "cbind(yes,no) ~ gender * dept"
+               glm.out = glm(mod.form, family=binomial(logit),
+                             data=data.logistic )
+               summary(glm.out)
+```
+
+b)	Where possible, interpret all the model coefficients. May use the code :
+
+```{r,eval=FALSE} 
+exp(coef(glm.out))  #to obtain the odds ratios.
+```
+
+c)	Fit a model without an interaction term. Use Likelihood Ratio Test to check the need for interaction term.
