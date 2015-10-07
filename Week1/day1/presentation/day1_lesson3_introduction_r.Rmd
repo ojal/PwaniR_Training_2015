@@ -1,6 +1,6 @@
 ---
 title: "Introduction to R"
-author: "Ojal John"
+author: "Ken Mwai"
 output:
   beamer_presentation:
     theme: "CambridgeUS"
